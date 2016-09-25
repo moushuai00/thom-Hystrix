@@ -1,0 +1,83 @@
+group 'thom-apps'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+//apply plugin: 'jetty'
+apply plugin: 'tomcat'
+
+// JDK 7
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+configurations.all {
+    exclude group: "commons-logging", module: "commons-logging"
+}
+
+dependencies {
+
+    compile 'ch.qos.logback:logback-classic:1.1.3'
+    compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+    compile 'javax.servlet:jstl:1.2'
+    compile 'org.slf4j:jcl-over-slf4j:1.7.21'
+    compile 'com.netflix.hystrix:hystrix-core:1.3.8'
+    compile 'org.apache.httpcomponents:fluent-hc:4.3.2'
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile 'org.aspectj:aspectjrt:1.7.4'
+    compile 'org.aspectj:aspectjweaver:1.7.4'
+    compile 'com.netflix.hystrix:hystrix-metrics-event-stream:1.3.9'
+
+
+    def tomcatVersion = '7.0.11'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
+
+}
+
+tomcat {
+    httpPort = 8090
+    stopPort = 8091
+    //httpsPort = 8091
+    //enableSSL = true
+}
+
+tomcatRun {
+    contextPath = 'thom-app'
+    URIEncoding = 'UTF-8'
+    reloadable = 'true'
+
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.2.3'
+    }
+}
+
+/*
+// Embeded Jetty for testing
+jettyRun{
+	contextPath = "spring4"
+	httpPort = 8080
+}
+
+jettyRunWar{
+	contextPath = "spring4"
+	httpPort = 8080
+}
+
+*/

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/thom-Hystrix.iml" filepath="$PROJECT_DIR$/.idea/modules/thom-Hystrix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/thom-Hystrix_main.iml" filepath="$PROJECT_DIR$/.idea/modules/thom-Hystrix_main.iml" group="thom-Hystrix" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/thom-Hystrix_test.iml" filepath="$PROJECT_DIR$/.idea/modules/thom-Hystrix_test.iml" group="thom-Hystrix" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/thom-hystrix.iml" filepath="$PROJECT_DIR$/.idea/modules/thom-hystrix.iml" />
+    </modules>
+  </component>
+</project>
