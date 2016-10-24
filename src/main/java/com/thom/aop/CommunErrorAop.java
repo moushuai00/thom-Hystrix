@@ -22,7 +22,7 @@ public class CommunErrorAop implements InitializingBean {
     @Around("@annotation(com.thom.annotion.IgnoreError)")
     public Object ignoreError(ProceedingJoinPoint joinPoint) {
 
-        System.out.println(joinPoint.getClass() + "xxxxxxxxxxxxxxx");
+        logger.info(joinPoint.getClass() + "xxxxxxxxxxxxxxx");
 
         try {
             return joinPoint.proceed();
@@ -38,7 +38,7 @@ public class CommunErrorAop implements InitializingBean {
 
     @Before("@annotation(com.thom.annotion.IgnoreError)")
     public Object ignoreError(JoinPoint joinPoint) {
-        System.out.println("beforexxxxxxxxxxxxxxx");
+        logger.info("beforexxxxxxxxxxxxxxx");
 
         return null;
 
@@ -46,6 +46,6 @@ public class CommunErrorAop implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("xxxxxxxxafterPropertiesSetxxxxxxx");
+       logger.info("xxxxxxxxafterPropertiesSetxxxxxxx");
     }
 }
