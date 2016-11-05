@@ -3,8 +3,8 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
-    <display-name>Gradle + Spring MVC Hello World + XML</display-name>
-    <description>Spring MVC web application</description>
+    <display-name>thom-histrix</display-name>
+    <description>Thom histrix web application</description>
 
     <!-- For web context -->
     <servlet>
@@ -44,6 +44,16 @@
     <filter-mapping>
         <filter-name>RequestContextFilter</filter-name>
         <servlet-name>hello-dispatcher</servlet-name>
+    </filter-mapping>
+
+    <filter>
+        <display-name>HystrixRequestContextServletFilter</display-name>
+        <filter-name>HystrixRequestContextServletFilter</filter-name>
+        <filter-class>com.netflix.hystrix.contrib.requestservlet.HystrixRequestContextServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HystrixRequestContextServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 
 </web-app>

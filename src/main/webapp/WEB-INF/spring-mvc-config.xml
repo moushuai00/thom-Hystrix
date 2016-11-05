@@ -13,9 +13,10 @@
          http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd ">
 
-    <context:component-scan base-package="com.thom"/>
+    <context:component-scan base-package="com.thom.hystrix"/>
+    <aop:aspectj-autoproxy/>
 
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <bean id="hystrixAspect" class="com.thom.hystrix.aop.HystrixCommandAspect"></bean>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -26,5 +27,11 @@
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <mvc:annotation-driven/>
+
+    <bean id="propertyConfigurer" class="com.thom.hystrix.lang.PropertyPlaceholder">
+        <property name="location">
+            <value>classpath:config.properties</value>
+        </property>
+    </bean>
 
 </beans>

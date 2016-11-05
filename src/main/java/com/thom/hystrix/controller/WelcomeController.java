@@ -1,7 +1,7 @@
-package com.thom.controller;
+package com.thom.hystrix.controller;
 
-import com.thom.annotion.IgnoreError;
-import com.thom.service.HelloWorldService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.thom.hystrix.service.HelloWorldService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,9 @@ public class WelcomeController {
         this.helloWorldService = helloWorldService;
     }
 
-    @IgnoreError
+    @HystrixCommand(groupKey = "UserGroup", commandKey = "GetUserByIdCommand")
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
-
         logger.info("index() is executed!");
 
         model.put("title", helloWorldService.getTitle(""));
@@ -36,7 +35,6 @@ public class WelcomeController {
         return "index";
     }
 
-    @IgnoreError
     @RequestMapping(value = "/hello/{name:.+}", method = RequestMethod.GET)
     public ModelAndView hello(@PathVariable("name") String name) {
 
