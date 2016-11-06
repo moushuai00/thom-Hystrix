@@ -1,0 +1,29 @@
+{
+  "button": [
+    {
+      "type": "click",
+      "name": "业务范围",
+      "key": "BIZ_SCOPE"
+    },
+    {
+      "name": "预约",
+      "sub_button": [
+        {
+          "type": "view",
+          "name": "我的预约",
+          "url": "http://1.thom.applinzi.com/appointment/fetch"
+        },
+        {
+          "type": "view",
+          "name": "新增预约",
+          "url": "http://1.thom.applinzi.com/appointment/add"
+        },
+        {
+          "type": "click",
+          "name": "赞一下我们",
+          "key": "V1001_GOOD"
+        }
+      ]
+    }
+  ]
+}
