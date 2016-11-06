@@ -48,6 +48,9 @@ public class WechatMenuService {
      */
     public boolean create() throws IOException {
         String accessToken = wechatTokenService.getAccessToken();
+
+        logger.info("Token {}", accessToken);
+
         String uri = String.format(IWeiXinUrl.menu_create, accessToken);
 
         HttpHeaders headers = new HttpHeaders();
@@ -74,20 +77,20 @@ public class WechatMenuService {
     private Menu getMenu() {
         CommonButton btn11 = new CommonButton();
         btn11.setName("天气预报");
-        btn11.setType("click");
+        btn11.setType("view");
         btn11.setKey("11");
         btn11.setUrl("http://1.thom.applinzi.com/appointment/fetch");
 
 
         CommonButton btn21 = new CommonButton();
         btn21.setName("歌曲点播");
-        btn21.setType("click");
+        btn21.setType("view");
         btn21.setKey("21");
         btn21.setUrl("http://1.thom.applinzi.com/appointment/fetch");
 
         CommonButton btn31 = new CommonButton();
         btn31.setName("Q友圈");
-        btn31.setType("click");
+        btn31.setType("view");
         btn31.setKey("31");
         btn31.setUrl("http://1.thom.applinzi.com/appointment/fetch");
 
