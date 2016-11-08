@@ -1,5 +1,6 @@
 package com.thom.hystrix.service;
 
+import com.thom.hystrix.common.GlobalInfo;
 import com.thom.hystrix.common.IWeiXinUrl;
 import com.thom.hystrix.dto.AccessToken;
 import com.thom.hystrix.lang.PropertyPlaceholder;
@@ -48,13 +49,25 @@ public class WechatTokenService {
      * @return accessToken
      */
     public String getAccessToken() {
-        String appId = PropertyPlaceholder.getProperty("appId");
-        String appSerect = PropertyPlaceholder.getProperty("appSecret");
-        String url = String.format(IWeiXinUrl.access_token, appId, appSerect);
-        AccessToken accessToken = restTemplate.getForObject(url, AccessToken.class);
+        String token = GlobalInfo.token;
+        if (StringUtils.isNotBlank(token)) {
+            long tokenExpired = GlobalInfo.tokenExpired;
+            if ((System.currentTimeMillis() - GlobalInfo.getTokenExpiredimestamp) > 0) {//超时
+                String appId = PropertyPlaceholder.getProperty("appId");
+                String appSerect = PropertyPlaceholder.getProperty("appSecret");
+                String url = String.format(IWeiXinUrl.access_token, appId, appSerect);
 
-        if (accessToken != null && StringUtils.isNotBlank(accessToken.getAccess_token())) {
-            return accessToken.getAccess_token();
+                GlobalInfo.getTokenExpiredimestamp = System.currentTimeMillis();
+                AccessToken accessToken = restTemplate.getForObject(url, AccessToken.class);
+
+                if (accessToken != null && StringUtils.isNotBlank(accessToken.getAccess_token())) {
+                    GlobalInfo.token = accessToken.getAccess_token();
+                    GlobalInfo.tokenExpired = Long.valueOf(accessToken.getExpires_in());
+                    return accessToken.getAccess_token();
+                }
+            } else {
+                return token;
+            }
         }
 
         return null;

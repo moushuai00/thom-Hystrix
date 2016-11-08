@@ -79,7 +79,7 @@ public class WechatTokenController {
 
         String content = inputMessage.getContent();
         if (StringUtils.isNotBlank(content)) {
-            content = "我要打10个";
+            content = "我要打10个<a href=\"http://1.thom.applinzi.com/appointment/fetch\">点我</a>";
         } else {
             content = "No CAN NO BB";
         }
